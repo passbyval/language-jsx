@@ -14,6 +14,19 @@ patterns: [
       "3":
         name: "meta.brace.curly.jsx"
   }
+  # Match decorators wuthout function parens: @decorator
+  {
+    match: "^(@)([A-Za-z]*$)|(@)([\w\s\(){}:\'\"])*"
+    captures:
+      "0":
+        name: "function-call.js"
+      "1":
+        name: "punctuation.decorator"
+      "2":
+        name: "entity.name.function.js"
+      "3":
+        name: "punctuation.decorator"
+  }
   # Match inline JSX expressions with operators || &&: {myVar && yourVar}
   {
     match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
