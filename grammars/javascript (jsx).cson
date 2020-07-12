@@ -38,7 +38,7 @@ patterns: [
   }
   # Match standard HTML element: <div />, <span />, etc
   {
-    match: "(<\/?)([a-z]*)(.*)(>)"
+    match: "(<\/?)([a-z]+)(.*)(>)"
     captures:
       "1":
         name: "punctuation.definition.tag.begin"
@@ -79,7 +79,7 @@ patterns: [
   }
   # Match JSX variable attributes: <Component onClick={this.onClick} />
   {
-    match: "([\\w*\$*\-]*)(=)({)({?)(this)?(\\.?)([\\s\\w\\'\",:?]*)(}?)(})"
+    match: "([\\w*\$*\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(})"
     captures:
       "1":
         name: "entity.other.attribute-name"
@@ -88,17 +88,28 @@ patterns: [
       "3":
         name: "punctuation.section.embedded.begin"
       "4":
-        name: "punctuation.definition.block.begin"
-      "5":
         name: "variable.language.this"
-      "6":
+      "5":
         name: "punctuation.accessor"
-      "7":
+      "6":
         name: "variable.other.property"
-      "8":
-        name: "punctuation.definition.block.end"
-      "9":
+      "7":
         name: "punctuation.section.embedded.end"
+  }
+  # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
+  {
+    match: "(\\s*)(\\w+)(:)(\\s*)(\\')(\\w*)(\\')"
+    captures:
+      "2":
+        name: "meta.object-literal.key"
+      "3":
+        name: "punctuation.separator.key-value"
+      "5":
+        name: "punctuation.definition.string.begin"
+      "6":
+        name: "single.quoted.string"
+      "7":
+        name: "punctuation.definition.string.end"
   }
   # Match rest of .this instances
   {
@@ -106,7 +117,16 @@ patterns: [
     captures:
       "1":
         name: "variable.language.this"
+  }
+  # Match nested properties
+  {
+    match: "([A-Za-z0-9]*)(\\.)([A-Za-z0-9]*)"
+    captures:
+      "1":
+        name: "variable.other.property"
       "2":
         name: "punctuation.accessor"
+      "3":
+        name: "variable.other.property"
   }
 ]
