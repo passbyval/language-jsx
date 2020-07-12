@@ -1,0 +1,112 @@
+fileTypes: []
+injectionSelector: "L:source.js"
+name: "Javascript (JSX)"
+scopeName: "val.jsx"
+patterns: [
+  # Match JSX expressions: {myVar}
+  {
+    match: "({)(\\w+)(})"
+    captures:
+      "1":
+        name: "meta.brace.curly.jsx"
+      "2":
+        name: "variable.jsx"
+      "3":
+        name: "meta.brace.curly.jsx"
+  }
+  # Match inline JSX expressions with operators || &&: {myVar && yourVar}
+  {
+    match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
+    captures:
+      "1":
+        name: "meta.brace.curly.jsx"
+      "2":
+        name: "variable.jsx"
+      "3":
+        name: "meta.operator.logical.jsx"
+  }
+  # Match React components: <Component />
+  {
+    match: "(<\/?)([A-Z][\\w]*)(?:\\.?)(\\w*)"
+    captures:
+      "1":
+        name: "punctuation.definition.tag.begin.jsx"
+      "2":
+        name: "support.class.component"
+      "3":
+        name: "support.class.component"
+  }
+  # Match standard HTML element: <div />, <span />, etc
+  {
+    match: "(<\/?)([a-z]*)(.*)(>)"
+    captures:
+      "1":
+        name: "punctuation.definition.tag.begin"
+      "2":
+        name: "entity.name.tag"
+      "4":
+        name: "punctuation.definition.tag.end."
+  }
+  # Match single quote string attributes: <Component value='hello' />
+  {
+    match: "(\\w*)(=)(\\')([\\w-]*)(\\')"
+    captures:
+      "1":
+        name: "entity.other.attribute-name.jsx"
+      "2":
+        name: "keyword.operator.assignment"
+      "3":
+        name: "punctuation.definition.string.begin"
+      "4":
+        name: "string.quoted.single"
+      "5":
+        name: "punctuation.definition.string.end"
+  }
+  # Match double quote string attributes: <Component value="hello" />
+  {
+    match: "(\\w*)(=)(\")([\\w-]*)(\")"
+    captures:
+      "1":
+        name: "entity.other.attribute-name"
+      "2":
+        name: "keyword.operator.assignment"
+      "3":
+        name: "punctuation.definition.string.begin"
+      "4":
+        name: "string.quoted.single"
+      "5":
+        name: "punctuation.definition.string.end"
+  }
+  # Match JSX variable attributes: <Component onClick={this.onClick} />
+  {
+    match: "([\\w*\$*\-]*)(=)({)({?)(this)?(\\.?)([\\s\\w\\'\",:?]*)(}?)(})"
+    captures:
+      "1":
+        name: "entity.other.attribute-name"
+      "2":
+        name: "keyword.operator.assignment"
+      "3":
+        name: "punctuation.section.embedded.begin"
+      "4":
+        name: "punctuation.definition.block.begin"
+      "5":
+        name: "variable.language.this"
+      "6":
+        name: "punctuation.accessor"
+      "7":
+        name: "variable.other.property"
+      "8":
+        name: "punctuation.definition.block.end"
+      "9":
+        name: "punctuation.section.embedded.end"
+  }
+  # Match rest of .this instances
+  {
+    match: "(this)(.)"
+    captures:
+      "1":
+        name: "variable.language.this"
+      "2":
+        name: "punctuation.accessor"
+  }
+]
