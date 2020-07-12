@@ -27,6 +27,15 @@ patterns: [
       "3":
         name: "punctuation.decorator"
   }
+  # Match object keys and :
+  {
+    match: "(\\w*)(:)([\\w\\s])*"
+    captures:
+      "1":
+        name: "meta.object-literal.key"
+      "2":
+        name: "punctuation.separator.key-value"
+  }
   # Match inline JSX expressions with operators || &&: {myVar && yourVar}
   {
     match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
@@ -48,6 +57,15 @@ patterns: [
         name: "support.class.component"
       "3":
         name: "support.class.component"
+  }
+  {
+    # Match class names: SomeClass
+    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}])(Object)"
+    captures:
+      "2":
+        name: "entity.name.type.class"
+      "4"
+        name: "entity.name.type.class"
   }
   # Match standard HTML element: <div />, <span />, etc
   {
