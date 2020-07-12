@@ -60,11 +60,11 @@ patterns: [
   }
   {
     # Match class names: SomeClass
-    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}])(Object)"
+    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}])|(Object)"
     captures:
       "2":
         name: "entity.name.type.class"
-      "4"
+      "3":
         name: "entity.name.type.class"
   }
   # Match standard HTML element: <div />, <span />, etc
