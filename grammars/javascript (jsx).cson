@@ -111,22 +111,24 @@ patterns: [
       "7":
         name: "punctuation.definition.string.end"
   }
+  # Match nested properties
+  {
+    match: "(this)?([A-Za-z0-9]*)(\\.)([A-Za-z0-9]*)"
+    captures:
+      "1":
+        name: "variable.language.this"
+      "2":
+        name: "variable.other.property"
+      "3":
+        name: "punctuation.accessor"
+      "4":
+        name: "variable.other.property"
+  }
   # Match rest of .this instances
   {
     match: "(this)(.)"
     captures:
       "1":
         name: "variable.language.this"
-  }
-  # Match nested properties
-  {
-    match: "([A-Za-z0-9]*)(\\.)([A-Za-z0-9]*)"
-    captures:
-      "1":
-        name: "variable.other.property"
-      "2":
-        name: "punctuation.accessor"
-      "3":
-        name: "variable.other.property"
   }
 ]
