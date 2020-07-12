@@ -14,7 +14,7 @@ patterns: [
       "3":
         name: "meta.brace.curly.jsx"
   }
-  # Match decorators wuthout function parens: @decorator
+  # Match decorators without function parens: @decorator
   {
     match: "^(@)([A-Za-z]*$)|(@)([\w\s\(){}:\'\"])*"
     captures:
@@ -27,15 +27,24 @@ patterns: [
       "3":
         name: "punctuation.decorator"
   }
-  # Match object keys and :
   {
-    match: "(\\w*)(:)([\\w\\s])*"
+    # Match class names: SomeClass
+    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}.])"
     captures:
-      "1":
-        name: "meta.object-literal.key"
       "2":
-        name: "punctuation.separator.key-value"
+        name: "entity.name.type.class"
+      "3":
+        name: "entity.name.type.class"
   }
+  # Match object keys and :
+  # {
+  #   match: "(\\w*)(:)([\\w\\s])*"
+  #   captures:
+  #     "1":
+  #       name: "meta.object-literal.key"
+  #     "2":
+  #       name: "punctuation.separator.key-value"
+  # }
   # Match inline JSX expressions with operators || &&: {myVar && yourVar}
   {
     match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
@@ -57,15 +66,6 @@ patterns: [
         name: "support.class.component"
       "3":
         name: "support.class.component"
-  }
-  {
-    # Match class names: SomeClass
-    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}])|(Object)"
-    captures:
-      "2":
-        name: "entity.name.type.class"
-      "3":
-        name: "entity.name.type.class"
   }
   # Match standard HTML element: <div />, <span />, etc
   {
@@ -149,20 +149,6 @@ patterns: [
       "7":
         name: "punctuation.definition.string.end"
   }
-  # Match nested properties
-  {
-    match: "(this)?([A-Za-z0-9]*)(\\.)([A-Za-z0-9]*)"
-    captures:
-      "1":
-        name: "variable.language.this"
-      "2":
-        name: "variable.other.property"
-      "3":
-        name: "punctuation.accessor"
-      "4":
-        name: "variable.other.property"
-  }
-  # Match rest of .this instances
   {
     match: "(this)(.)"
     captures:
