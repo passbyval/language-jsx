@@ -96,6 +96,13 @@ patterns: [
       "7":
         name: "punctuation.section.embedded.end"
   }
+  # Match rest of attributes, including objects: <Component style={{}} />
+  {
+    match: "([\\w*\\$*\\-]*)(=)({)({?)"
+    captures:
+      "1":
+        name: "entity.other.attribute-name"
+  }
   # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
   {
     match: "(\\s*)(\\w+)(:)(\\s*)(\\')(\\w*)(\\')"
