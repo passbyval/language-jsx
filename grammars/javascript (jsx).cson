@@ -19,7 +19,7 @@ patterns: [
     match: "^(\\s*)(@)(\\w+)"
     captures:
       "0":
-        name: "function-call.val.jsx"
+        name: "meta.decorator.val.jsx"
       "2":
         name: "punctuation.decorator.val.jsx"
       "3":
