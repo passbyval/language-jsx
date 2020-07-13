@@ -16,16 +16,14 @@ patterns: [
   }
   # Match decorators without function parens: @decorator
   {
-    match: "^(@)([A-Za-z]*$)|(@)([\w\s\(){}:\'\"])*"
+    match: "^(\\s*)(@)(\\w+)"
     captures:
       "0":
         name: "function-call.js"
-      "1":
-        name: "punctuation.decorator"
       "2":
-        name: "entity.name.function.js"
-      "3":
         name: "punctuation.decorator"
+      "3":
+        name: "entity.name.function.js"
   }
   {
     # Match class names: SomeClass
@@ -36,16 +34,6 @@ patterns: [
       "3":
         name: "entity.name.type.class"
   }
-  # Match object keys and :
-  # {
-  #   match: "(\\w*)(:)([\\w\\s])*"
-  #   captures:
-  #     "1":
-  #       name: "meta.object-literal.key"
-  #     "2":
-  #       name: "punctuation.separator.key-value"
-  # }
-  # Match inline JSX expressions with operators || &&: {myVar && yourVar}
   {
     match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
     captures:
@@ -150,9 +138,13 @@ patterns: [
         name: "punctuation.definition.string.end"
   }
   {
-    match: "(this)(.)"
+    match: "(this)(.)(\\w+)"
     captures:
       "1":
         name: "variable.language.this"
+      "2":
+        name: "punctuation.accessor"
+      "3":
+        name: "variable.other.property"
   }
 ]
