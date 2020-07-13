@@ -3,148 +3,149 @@ injectionSelector: "L:source.js"
 name: "Javascript (JSX)"
 scopeName: "val.jsx"
 patterns: [
-  # Match JSX expressions: {myVar}
   {
+    # Match JSX expressions: {myVar}
     match: "({)(\\w+)(})"
     captures:
       "1":
-        name: "meta.brace.curly.jsx"
+        name: "meta.brace.curly.val.jsx"
       "2":
         name: "variable.jsx"
       "3":
-        name: "meta.brace.curly.jsx"
+        name: "meta.brace.curly.val.jsx"
   }
-  # Match decorators without function parens: @decorator
   {
+    # Match decorators without function parens: @decorator
     match: "^(\\s*)(@)(\\w+)"
     captures:
       "0":
-        name: "function-call.js"
+        name: "function-call.val.jsx"
       "2":
-        name: "punctuation.decorator"
+        name: "punctuation.decorator.val.jsx"
       "3":
-        name: "entity.name.function.js"
+        name: "entity.name.function.val.jsx"
   }
   {
     # Match class names: SomeClass
     match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}.])"
     captures:
       "2":
-        name: "entity.name.type.class"
+        name: "entity.name.type.class.val.jsx"
       "3":
-        name: "entity.name.type.class"
+        name: "entity.name.type.class.val.jsx"
   }
   {
     match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
     captures:
       "1":
-        name: "meta.brace.curly.jsx"
+        name: "meta.brace.curly.val.jsx"
       "2":
-        name: "variable.jsx"
+        name: "variable.val.jsx"
       "3":
-        name: "meta.operator.logical.jsx"
+        name: "meta.operator.logical.val.jsx"
   }
-  # Match React components: <Component />
   {
+    # Match React components: <Component />
     match: "(<\/?)([A-Z][\\w]*)(?:\\.?)(\\w*)"
     captures:
       "1":
-        name: "punctuation.definition.tag.begin.jsx"
+        name: "punctuation.definition.tag.begin.val.jsx"
       "2":
-        name: "support.class.component"
+        name: "support.class.component.val.jsx"
       "3":
-        name: "support.class.component"
+        name: "support.class.component.val.jsx"
   }
-  # Match standard HTML element: <div />, <span />, etc
   {
+    # Match standard HTML element: <div />, <span />, etc
     match: "(<\/?)([a-z]+)(.*)(>)"
     captures:
       "1":
-        name: "punctuation.definition.tag.begin"
+        name: "punctuation.definition.tag.begin.val.jsx"
       "2":
-        name: "entity.name.tag"
+        name: "entity.name.tag.val.jsx"
       "4":
-        name: "punctuation.definition.tag.end."
+        name: "punctuation.definition.tag.end.val.jsx"
   }
-  # Match single quote string attributes: <Component value='hello' />
   {
+    # Match single quote string attributes: <Component value='hello' />
     match: "(\\w*)(=)(\\')([\\w-]*)(\\')"
     captures:
       "1":
-        name: "entity.other.attribute-name.jsx"
+        name: "entity.other.attribute-name.jsx.val.jsx"
       "2":
-        name: "keyword.operator.assignment"
+        name: "keyword.operator.assignment.val.jsx"
       "3":
-        name: "punctuation.definition.string.begin"
+        name: "punctuation.definition.string.begin.val.jsx"
       "4":
-        name: "string.quoted.single"
+        name: "string.quoted.single.val.jsx"
       "5":
-        name: "punctuation.definition.string.end"
+        name: "punctuation.definition.string.end.val.jsx"
   }
-  # Match double quote string attributes: <Component value="hello" />
   {
+    # Match double quote string attributes: <Component value="hello" />
     match: "(\\w*)(=)(\")([\\w-]*)(\")"
     captures:
       "1":
-        name: "entity.other.attribute-name"
+        name: "entity.other.attribute-name.val.jsx"
       "2":
-        name: "keyword.operator.assignment"
+        name: "keyword.operator.assignment.val.jsx"
       "3":
-        name: "punctuation.definition.string.begin"
+        name: "punctuation.definition.string.begin.val.jsx"
       "4":
-        name: "string.quoted.single"
+        name: "string.quoted.single.val.jsx"
       "5":
-        name: "punctuation.definition.string.end"
+        name: "punctuation.definition.string.end.val.jsx"
   }
-  # Match JSX variable attributes: <Component onClick={this.onClick} />
   {
+    # Match JSX variable attributes: <Component onClick={this.onClick} />
     match: "([\\w*\$*\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(})"
     captures:
       "1":
-        name: "entity.other.attribute-name"
+        name: "entity.other.attribute-name.val.jsx"
       "2":
-        name: "keyword.operator.assignment"
+        name: "keyword.operator.assignment.val.jsx"
       "3":
-        name: "punctuation.section.embedded.begin"
+        name: "punctuation.section.embedded.begin.val.jsx"
       "4":
-        name: "variable.language.this"
+        name: "variable.language.this.val.jsx"
       "5":
-        name: "punctuation.accessor"
+        name: "punctuation.accessor.val.jsx"
       "6":
-        name: "variable.other.property"
+        name: "variable.other.property.val.jsx"
       "7":
-        name: "punctuation.section.embedded.end"
+        name: "punctuation.section.embedded.end.val.jsx"
   }
-  # Match rest of attributes, including objects: <Component style={{}} />
   {
+    # Match rest of attributes, including objects: <Component style={{}} />
     match: "([\\w*\\$*\\-]*)(=)({)({?)"
     captures:
       "1":
-        name: "entity.other.attribute-name"
+        name: "entity.other.attribute-name.val.jsx"
   }
-  # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
   {
+    # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
     match: "(\\s*)(\\w+)(:)(\\s*)(\\')(\\w*)(\\')"
     captures:
       "2":
-        name: "meta.object-literal.key"
+        name: "meta.object-literal.key.val.jsx"
       "3":
-        name: "punctuation.separator.key-value"
+        name: "punctuation.separator.key-value.val.jsx"
       "5":
-        name: "punctuation.definition.string.begin"
+        name: "punctuation.definition.string.begin.val.jsx"
       "6":
-        name: "single.quoted.string"
+        name: "single.quoted.string.val.jsx"
       "7":
-        name: "punctuation.definition.string.end"
+        name: "punctuation.definition.string.end.val.jsx"
   }
   {
-    match: "(this)(.)(\\w+)"
+    # Match .this
+    match: "(this)(.)((\\w*[\\s]|$)?)"
     captures:
       "1":
-        name: "variable.language.this"
+        name: "variable.language.this.val.jsx"
       "2":
-        name: "punctuation.accessor"
-      "3":
-        name: "variable.other.property"
+        name: "punctuation.accessor.val.jsx"
+      "4":
+        name: "variable.other.property.val.jsx"
   }
 ]
