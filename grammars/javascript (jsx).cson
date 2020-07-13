@@ -15,6 +15,17 @@ patterns: [
         name: "meta.brace.curly.val.jsx"
   }
   {
+    # Match JSX expressions with operators: {myVar && yourVar} | {myVar || yourVar}
+    match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
+    captures:
+      "1":
+        name: "meta.brace.curly.val.jsx"
+      "2":
+        name: "variable.val.jsx"
+      "3":
+        name: "meta.operator.logical.val.jsx"
+  }
+  {
     # Match decorators without function parens: @decorator
     match: "^(\\s*)(@)(\\w+)"
     captures:
@@ -33,16 +44,6 @@ patterns: [
         name: "entity.name.type.class.val.jsx"
       "3":
         name: "entity.name.type.class.val.jsx"
-  }
-  {
-    match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
-    captures:
-      "1":
-        name: "meta.brace.curly.val.jsx"
-      "2":
-        name: "variable.val.jsx"
-      "3":
-        name: "meta.operator.logical.val.jsx"
   }
   {
     # Match React components: <Component />
