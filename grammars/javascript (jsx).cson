@@ -27,7 +27,7 @@ patterns: [
   }
   {
     # Match class names: SomeClass
-    match: "([\\s|^|{])(([A-Z][a-z0-9]+)+)([\\s|$|}.])"
+    match: "([\\s])([A-Z][a-z]+(?:[A-Z][a-z]+)|([A-Z]+[a-z]+))"
     captures:
       "2":
         name: "entity.name.type.class.val.jsx"
