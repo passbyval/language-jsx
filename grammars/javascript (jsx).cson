@@ -27,22 +27,22 @@ patterns: [
   }
   {
     # Match decorators without function parens: @decorator
-    match: "^(\\s*)(@)(\\w+)"
+    match: "^(?:\\s*)(@)(\\w+)"
     captures:
       "0":
         name: "meta.decorator.val.jsx"
-      "2":
+      "1":
         name: "punctuation.decorator.val.jsx"
-      "3":
+      "2":
         name: "entity.name.function.val.jsx"
   }
   {
     # Match class names: SomeClass
-    match: "(?:[\\s{,]+)(([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:[\\s{}])([A-Z]+[a-z]+))"
+    match: "(?:[\\s{,]+)(?:([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:[\\s{}])([A-Z]+[a-z]+))"
     captures:
-      "2":
+      "1":
         name: "entity.name.type.class.val.jsx"
-      "3":
+      "2":
         name: "entity.name.type.class.val.jsx"
   }
   {
@@ -58,13 +58,13 @@ patterns: [
   }
   {
     # Match standard HTML element: <div />, <span />, etc
-    match: "(<\/?)([a-z]+)(.*)(>)"
+    match: "(<\/?)([a-z]+)(?:.*)(>)"
     captures:
       "1":
         name: "punctuation.definition.tag.begin.val.jsx"
       "2":
         name: "entity.name.tag.val.jsx"
-      "4":
+      "3":
         name: "punctuation.definition.tag.end.val.jsx"
   }
   {
@@ -118,29 +118,29 @@ patterns: [
   }
   {
     # Match rest of attributes, including objects: <Component style={{}} />
-    match: "([\\w*\\$*\\-]*)(=)({)({?)"
+    match: "([\\w*\\$*\\-]*)(?:=)(?:{)(?:{?)"
     captures:
       "1":
         name: "entity.other.attribute-name.val.jsx"
   }
   {
     # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
-    match: "(\\s*)(\\w+)(:)(\\s*)(\\')(\\w*)(\\')"
+    match: "(?:\\s*)(\\w+)(:)(?:\\s*)(\\')(\\w*)(\\')"
     captures:
-      "2":
+      "1":
         name: "meta.object-literal.key.val.jsx"
-      "3":
+      "2":
         name: "punctuation.separator.key-value.val.jsx"
-      "5":
+      "3":
         name: "punctuation.definition.string.begin.val.jsx"
-      "6":
+      "4":
         name: "single.quoted.string.val.jsx"
-      "7":
+      "5":
         name: "punctuation.definition.string.end.val.jsx"
   }
   {
     # Match .this
-    match: "(this)(.)((\\w*[\\s]|$)?)"
+    match: "(this)(.)(?:(\\w*[\\s]|$)?)"
     captures:
       "1":
         name: "variable.language.this.val.jsx"
