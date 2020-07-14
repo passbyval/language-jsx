@@ -37,13 +37,15 @@ patterns: [
         name: "entity.name.function.val.jsx"
   }
   {
-    # Match class names: SomeClass
-    match: "(?:[\\s{,]+)(?:([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:[\\s{}])([A-Z]+[a-z]+))"
+    # Match standard HTML element: <div />, <span />, etc
+    match: "(<\/?)([a-z]+)(?:.*)(>)"
     captures:
       "1":
-        name: "entity.name.type.class.val.jsx"
+        name: "punctuation.definition.tag.begin.val.jsx"
       "2":
-        name: "entity.name.type.class.val.jsx"
+        name: "entity.name.tag.val.jsx"
+      "3":
+        name: "punctuation.definition.tag.end.val.jsx"
   }
   {
     # Match React components: <Component />
@@ -57,15 +59,13 @@ patterns: [
         name: "support.class.component.val.jsx"
   }
   {
-    # Match standard HTML element: <div />, <span />, etc
-    match: "(<\/?)([a-z]+)(?:.*)(>)"
+    # Match class names: SomeClass
+    match: "(?:[\\s{,]+)(?:([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:\\b)(?:[\\s{}])([A-Z]+[a-z]+))"
     captures:
       "1":
-        name: "punctuation.definition.tag.begin.val.jsx"
+        name: "entity.name.type.class.val.jsx"
       "2":
-        name: "entity.name.tag.val.jsx"
-      "3":
-        name: "punctuation.definition.tag.end.val.jsx"
+        name: "entity.name.type.class.val.jsx"
   }
   {
     # Match single quote string attributes: <Component value='hello' />
