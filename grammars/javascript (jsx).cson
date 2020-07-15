@@ -16,13 +16,15 @@ patterns: [
   }
   {
     # Match JSX expressions with operators: {myVar && yourVar} | {myVar || yourVar}
-    match: "({)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
+    match: "(?:\\s*)({)(?:(?:!?)(this)\\.?)([a-zA-Z0-9]+)\\s(&&|\\|\\|)"
     captures:
       "1":
         name: "meta.brace.curly.val.jsx"
       "2":
-        name: "variable.val.jsx"
+        name: "variable.language.this.val.jsx"
       "3":
+        name: "variable.val.jsx"
+      "4":
         name: "meta.operator.logical.val.jsx"
   }
   {
@@ -37,17 +39,6 @@ patterns: [
         name: "entity.name.function.val.jsx"
   }
   {
-    # Match standard HTML element: <div />, <span />, etc
-    match: "(<\/?)([a-z]+)(?:.*)(>)"
-    captures:
-      "1":
-        name: "punctuation.definition.tag.begin.val.jsx"
-      "2":
-        name: "entity.name.tag.val.jsx"
-      "3":
-        name: "punctuation.definition.tag.end.val.jsx"
-  }
-  {
     # Match React components: <Component />
     match: "(<\/?)([A-Z][\\w]*)(?:\\.?)(\\w*)"
     captures:
@@ -60,11 +51,20 @@ patterns: [
   }
   {
     # Match class names: SomeClass
-    match: "(?:[\\s{,]+)(?:([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:\\b)(?:[\\s{}])([A-Z]+[a-z]+))"
+    match: "(?:[\\s{,]+)(?:([A-Z][a-z]+(?:[A-Z][a-z]+)+)|(?:\\b)(?:[\\s{}])([A-Z]+[a-z]+))|((\\b)([A-Z]+[a-z]+)(\\s*\\,))"
     captures:
       "1":
         name: "entity.name.type.class.val.jsx"
       "2":
+        name: "entity.name.type.class.val.jsx"
+      "3":
+        name: "entity.name.type.class.val.jsx"
+  }
+  {
+    # Capture class names within template strings: ${Class}
+    match: "(?:\\$)(?:{)([A-Z][a-z]+(?:[A-Z][a-z]+)+)(?:})"
+    captures:
+      "1":
         name: "entity.name.type.class.val.jsx"
   }
   {
@@ -118,10 +118,26 @@ patterns: [
   }
   {
     # Match rest of attributes, including objects: <Component style={{}} />
-    match: "([\\w*\\$*\\-]*)(?:=)(?:{)(?:{?)"
+    match: "(?:\\s*)([\\w\\$*\\-]+)(?:=)(?:{)(?:{?)"
     captures:
       "1":
         name: "entity.other.attribute-name.val.jsx"
+  }
+  {
+    # Match standard HTML element: <div />, <span />, etc
+    match: "(<\/?)([a-z]+)(\\s+)"
+    captures:
+      "1":
+        name: "punctuation.definition.tag.begin.val.jsx"
+      "2":
+        name: "entity.name.tag.val.jsx"
+  }
+  {
+    # Capture rogue closing brackets
+    match: "(?:\\s+)(>)(?:\\s*)|(?:[\\'\"\\s}]+)(>)"
+    captures:
+      "1":
+        name: "punctuation.definition.tag.end.val.jsx"
   }
   {
     # Match strings inside JSX attribute object: <Component style={{ color: 'red' }} />
@@ -140,13 +156,13 @@ patterns: [
   }
   {
     # Match .this
-    match: "(this)(.)(?:(\\w*[\\s]|$)?)"
+    match: "(?:!?)(this)(.)(?:(\\w*[\\s}]|$)?)"
     captures:
       "1":
         name: "variable.language.this.val.jsx"
       "2":
         name: "punctuation.accessor.val.jsx"
-      "4":
+      "3":
         name: "variable.other.property.val.jsx"
   }
 ]
