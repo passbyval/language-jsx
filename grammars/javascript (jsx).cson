@@ -23,7 +23,7 @@ patterns: [
       "2":
         name: "variable.language.this.val.jsx"
       "3":
-        name: "variable.val.jsx"
+        name: "meta.operator.logical.val.jsx"
       "4":
         name: "meta.operator.logical.val.jsx"
   }
@@ -99,7 +99,7 @@ patterns: [
   }
   {
     # Match JSX variable attributes: <Component onClick={this.onClick} />
-    match: "([\\w*\$*\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(})"
+    match: "(?:([\\w*\\$*\\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(}))|(?:([\\w$]+)(=)({)([\\w\\s]+)(===?)(?:\\s+)(?:\\w+\\.?)+(}))"
     captures:
       "1":
         name: "entity.other.attribute-name.val.jsx"
@@ -115,6 +115,16 @@ patterns: [
         name: "variable.other.property.val.jsx"
       "7":
         name: "punctuation.section.embedded.end.val.jsx"
+      "8":
+        name: "entity.other.attribute-name.val.jsx"
+      "9":
+        name: "keyword.operator.assignment.val.jsx"
+      "10":
+        name: "punctuation.section.embedded.begin.val.jsx"
+      "12":
+        name: "keyword.operator.comparison.val.jsx"
+      "13":
+        name: "punctuation.section.embedded.end.val.jsx"
   }
   {
     # Match rest of attributes, including objects: <Component style={{}} />
@@ -125,7 +135,7 @@ patterns: [
   }
   {
     # Match standard HTML element: <div />, <span />, etc
-    match: "(<\/?)([a-z]+)(\\s+)"
+    match: "(<\/?)([a-z]+)([\\s>]+)"
     captures:
       "1":
         name: "punctuation.definition.tag.begin.val.jsx"
@@ -134,7 +144,7 @@ patterns: [
   }
   {
     # Capture rogue closing brackets
-    match: "(?:\\s+)(>)(?:\\s*)|(?:[\\'\"\\s}]+)(>)"
+    match: "(?:\\s+)(>)(?:\\s*)"
     captures:
       "1":
         name: "punctuation.definition.tag.end.val.jsx"
