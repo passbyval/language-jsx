@@ -5,14 +5,39 @@ scopeName: "val.jsx"
 patterns: [
   {
     # Match JSX expressions: {myVar}
-    match: "({)(\\w+)(})"
+    match: "(?:{)(\\w+)(?:})"
     captures:
       "1":
-        name: "meta.brace.curly.val.jsx"
+        name: "variable.val.jsx"
+  }
+  {
+    # Match JSX variable attributes: <Component onClick={this.onClick} />
+    match: "(?:([\\w*\\$*\\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(}))|(?:([\\w$]+)(=)({)([\\w\\s]+)(===?)(?:\\s+)(?:\\w+\\.?)+(}))"
+    captures:
+      "1":
+        name: "entity.other.attribute-name.val.jsx"
       "2":
-        name: "variable.jsx"
+        name: "keyword.operator.assignment.val.jsx"
       "3":
-        name: "meta.brace.curly.val.jsx"
+        name: "punctuation.section.embedded.begin.val.jsx"
+      "4":
+        name: "variable.language.this.val.jsx"
+      "5":
+        name: "punctuation.accessor.val.jsx"
+      "6":
+        name: "variable.other.property.val.jsx"
+      "7":
+        name: "punctuation.section.embedded.end.val.jsx"
+      "8":
+        name: "entity.other.attribute-name.val.jsx"
+      "9":
+        name: "keyword.operator.assignment.val.jsx"
+      "10":
+        name: "punctuation.section.embedded.begin.val.jsx"
+      "12":
+        name: "keyword.operator.comparison.val.jsx"
+      "13":
+        name: "punctuation.section.embedded.end.val.jsx"
   }
   {
     # Match JSX expressions with operators: {myVar && yourVar} | {myVar || yourVar}
@@ -57,6 +82,52 @@ patterns: [
         name: "entity.name.type.class.val.jsx"
   }
   {
+    # Match single word classes
+    match: "(import)(?:\\s+)([A-Z]+[a-z]*)(?:\\s+)(from)(?:\\s+)(\"|\\')([\\w\.\\/]+)(\"|\\')"
+    captures:
+      "0":
+        name: "meta.import"
+      "1":
+        name: "keyword.control.import"
+      "2":
+        name: "entity.name.type.class"
+      "3":
+        name: "keyword.control.from"
+      "4":
+        name: "punctuation.definition.string.begin"
+      "5":
+        name: "string.quoted"
+      "6":
+        name: "punctuation.definition.string.end"
+  }
+  {
+    # Match destructured class names
+    begin: "(?:(import)|(const)|(let)|(var))(?:\\s+)({)"
+    beginCaptures:
+      "1":
+        name: "keyword.control.import"
+      "2":
+        name: "storage.type"
+      "3":
+        name: "storage.type"
+      "4":
+        name: "storage.type"
+      "5":
+        name: "punctuation.definition.block"
+    end: "(})"
+    endCaptures:
+      "1":
+        name: "punctuation.definition.block"
+    patterns: [
+      {
+        match: "(?:(?:\\s*)(\\b[A-Z]+[A-Za-z]*))"
+        captures:
+          "1":
+            name: "entity.name.type.class"
+      }
+    ]
+  }
+  {
     # Capture class names within template strings and parens: ${Class}
     match: "(?:(?:\\$)(?:{)([A-Z][a-z]+(?:[A-Z][a-z]+)+)(?:}))|(?:(?:\\()((?:[A-Z][a-z]+)+)(?:\\)))"
     captures:
@@ -95,42 +166,13 @@ patterns: [
       "5":
         name: "punctuation.definition.string.end.val.jsx"
   }
-  {
-    # Match JSX variable attributes: <Component onClick={this.onClick} />
-    match: "(?:([\\w*\\$*\\-]*)(=)({)(this)?(\\.?)([\\s\\w\\'\",:]*)(}))|(?:([\\w$]+)(=)({)([\\w\\s]+)(===?)(?:\\s+)(?:\\w+\\.?)+(}))"
-    captures:
-      "1":
-        name: "entity.other.attribute-name.val.jsx"
-      "2":
-        name: "keyword.operator.assignment.val.jsx"
-      "3":
-        name: "punctuation.section.embedded.begin.val.jsx"
-      "4":
-        name: "variable.language.this.val.jsx"
-      "5":
-        name: "punctuation.accessor.val.jsx"
-      "6":
-        name: "variable.other.property.val.jsx"
-      "7":
-        name: "punctuation.section.embedded.end.val.jsx"
-      "8":
-        name: "entity.other.attribute-name.val.jsx"
-      "9":
-        name: "keyword.operator.assignment.val.jsx"
-      "10":
-        name: "punctuation.section.embedded.begin.val.jsx"
-      "12":
-        name: "keyword.operator.comparison.val.jsx"
-      "13":
-        name: "punctuation.section.embedded.end.val.jsx"
-  }
-  {
-    # Match rest of attributes, including objects: <Component style={{}} />
-    match: "(?:\\s*)([\\w\\$*\\-]+)(?:=)(?:{)(?:{?)"
-    captures:
-      "1":
-        name: "entity.other.attribute-name.val.jsx"
-  }
+  # {
+  #   # Match rest of attributes, including objects: <Component style={{}} />
+  #   match: "(?:\\s*)([\\w\\$*\\-]+)(?:=)(?:{)(?:{?)"
+  #   captures:
+  #     "1":
+  #       name: "entity.other.attribute-name.val.jsx"
+  # }
   {
     # Match standard HTML element: <div />, <span />, etc
     match: "(<\/?)([a-z]+)([\\s>]+)"
@@ -164,7 +206,7 @@ patterns: [
   }
   {
     # Match .this
-    match: "(?:!?)(this)(.)(?:(\\w*[\\s}]|$)?)"
+    match: "(?:!?)(this)(\\.)(?:(\\w*[\\s}]$)?)"
     captures:
       "1":
         name: "variable.language.this.val.jsx"
