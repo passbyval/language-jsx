@@ -120,7 +120,7 @@ patterns: [
         name: "punctuation.definition.block"
     patterns: [
       {
-        match: "(?:(?:\\s*)(\\b[A-Z]+[A-Za-z]*))"
+        match: "(?:(?:\\s*)(?<!\\/)(\\b[A-Z][a-z][A-Za-z]*))"
         captures:
           "1":
             name: "entity.name.type.class"
